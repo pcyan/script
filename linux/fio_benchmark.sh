@@ -5,6 +5,7 @@
 # title: fio_benchmark.sh
 # description: for nas disk speed test
 # how to use: 
+#    sudo apt update && sudo apt install -y fio jq
 #    ./fio_benchmark.sh
 #
 ##################################################
