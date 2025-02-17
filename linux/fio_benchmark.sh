@@ -44,6 +44,14 @@ function run_disk_test(){
     rm $test_file_name
     echo "Job job 32k顺序混合读写 completed."
 
+    echo "Running fio job 64k顺序混合读写"
+    test_file_name=$(random_filename)
+    fio --name="job_64k顺序混合读写" --filename=$test_file_name --size=1024M --bs=64k --ioengine=libaio --iodepth=4 \
+        --readwrite=rw --rwmixread=70 --runtime=60 --time_based --output-format=json \
+        >> "$FIO_LOGFILE"
+    rm $test_file_name
+    echo "Job job 64k顺序混合读写 completed."
+
     echo "Running fio job 1024k顺序混合读写"
     test_file_name=$(random_filename)
     fio --name="job_1024k顺序混合读写" --filename=$test_file_name --size=1024M --bs=1024k --ioengine=libaio --iodepth=4 \
@@ -68,6 +76,14 @@ function run_disk_test(){
         >> "$FIO_LOGFILE"
     rm $test_file_name
     echo "Job job 32k随机混合读写 completed."
+
+    echo "Running fio job 64k随机混合读写"
+    test_file_name=$(random_filename)
+    fio --name="job_64k随机混合读写" --filename=$test_file_name --size=100M --bs=64k --ioengine=libaio --iodepth=32 \
+        --readwrite=randrw --rwmixread=70 --runtime=60 --time_based --output-format=json \
+        >> "$FIO_LOGFILE"
+    rm $test_file_name
+    echo "Job job 64k随机混合读写 completed."
 
     echo "Running fio job 1024k随机混合读写"
     test_file_name=$(random_filename)
